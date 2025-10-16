@@ -7,6 +7,8 @@ import jwt from "jsonwebtoken";
 import session from "express-session";
 import passport from "passport";
 import dbConnect from "./config/dbConnect.js";
+import authRoutes from "./routes/authRoutes.js";
+import "./config/passportConfig.js";
 
 dotenv.config();
 dbConnect();
@@ -36,7 +38,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Routes
-
+app.use("/api/auth", authRoutes);
 //Server Listen
 const PORT = process.env.PORT || 5000;
 
