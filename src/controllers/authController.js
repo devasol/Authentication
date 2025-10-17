@@ -98,6 +98,7 @@ export const verify2FA = async (req, res) => {
     secret: user.twoFactorSecret,
     encoding: "base32",
     token,
+    window: 1,
   });
 
   if (verified) {
@@ -105,7 +106,7 @@ export const verify2FA = async (req, res) => {
       { username: user.username },
       process.env.JWT_SECRET,
       {
-        expiresIn: "1hr",
+        expiresIn: "1h",
       }
     );
     res.status(200).json({
