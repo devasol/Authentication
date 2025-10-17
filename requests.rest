@@ -28,3 +28,17 @@ POST http://localhost:9000/api/auth/logout
 
 ### 
 POST http://localhost:9000/api/auth/2fa/setup
+
+###
+
+POST http://localhost:9000/api/auth/2fa/verify
+
+Content-Type: application/json
+
+{
+    "token":"561942"
+}
+
+###
+
+POST http://localhost:9000/api/auth/2fa/reset
