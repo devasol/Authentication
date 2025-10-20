@@ -6,6 +6,13 @@ import speakeasy from "speakeasy";
 export const register = async (req, res) => {
   try {
     const { username, password } = req.body;
+
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(409).json({
+        error: "Username already exists.",
+      });
+    }
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
@@ -27,12 +34,34 @@ export const register = async (req, res) => {
   }
 };
 export const login = async (req, res) => {
-  console.log("Authenticated user is: ", req.user.username);
-  res.status(200).json({
-    message: "User logged in successfully",
-    username: req.user.username,
-    isMfaActive: req.user.isMfaActive,
-  });
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(401).json({ error: "Invalid login credentials" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid login credentials" });
+    }
+
+    req.login(user, (err) => {
+      if (err) {
+        return res.status(500).json({ error: "Error logging in" });
+      }
+      return res.status(200).json({
+        message: "User logged in successfully",
+        username: user.username,
+        isMfaActive: user.isMfaActive,
+      });
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Error logging in" });
+  }
 };
 
 export const authStatus = async (req, res) => {

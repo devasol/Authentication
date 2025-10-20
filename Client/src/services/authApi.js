@@ -37,7 +37,7 @@ export const logoutUser = async (username, password) => {
 };
 
 export const setup2FA = async () => {
-  return await api.get(
+  return await api.post(
     "/auth/2fa/setup",
     {},
     {
