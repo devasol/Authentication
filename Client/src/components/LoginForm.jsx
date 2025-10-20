@@ -1,9 +1,57 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { register, loginUser } from "../services/authApi";
 const LoginForm = () => {
   const [isRegister, setIsRegister] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await register(username, password);
+
+      setMessage(data.message);
+      setUsername("");
+      setPassword("");
+      setIsRegister(false);
+      setConfirmPassword("");
+    } catch (error) {
+      console.log("The err is : ", error.message);
+      setUsername("");
+      setPassword("");
+      setConfirmPassword("");
+      setError("Something went wrong during user registration");
+    }
+  };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await loginUser(username, password);
+
+      setMessage(data.message);
+      setUsername("");
+      setPassword("");
+    } catch (error) {
+      console.log("The err is : ", error.message);
+      setUsername("");
+      setPassword("");
+      setError("Invalid Login Credentials");
+    }
+  };
+
+  const handleRegisterToggle = () => {
+    setIsRegister(!isRegister);
+    setError("");
+    setMessage("");
+  };
+
   return (
     <form
+      onSubmit={isRegister ? handleRegister : handleLogin}
       action=""
       className="bg-white rounded-lg shadow-md w-full max-w-sm mx-auto"
     >
@@ -23,8 +71,8 @@ const LoginForm = () => {
             <input
               label="Username"
               text="text"
-              value=""
-              onChange=""
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               className="w-full p-2 border rounded mt-2"
               placeholder="Enter your Username"
               required
@@ -37,8 +85,8 @@ const LoginForm = () => {
             <input
               label="Password"
               type="password"
-              value=""
-              onChange=""
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full p-2 border rounded mt-2"
               placeholder="Enter your Password"
               required
@@ -52,8 +100,8 @@ const LoginForm = () => {
               <input
                 label="Confim Password"
                 type="password"
-                value=""
-                onChange=""
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 className="w-full p-2 border rounded mt-2"
                 placeholder="Enter Password Again"
                 required
@@ -63,7 +111,8 @@ const LoginForm = () => {
         ) : (
           ""
         )}
-
+        {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
+        {message && <p className="text-green-500 text-sm mb-3">{message}</p>}
         <button
           type="submit"
           className="w-full bg-blue-500 text-white py-2 rounded-md"
@@ -73,7 +122,7 @@ const LoginForm = () => {
         <div>
           <p className="pt-4 text-center text-gray-600 text-sm">
             {isRegister ? "Already have an ccount" : "Don't have an account"}?{" "}
-            <Link to="" onClick={() => setIsRegister(!isRegister)}>
+            <Link to="" onClick={handleRegisterToggle}>
               {isRegister ? "Login" : "Create Account"}
             </Link>
           </p>
