@@ -17,7 +17,7 @@ const app = express();
 
 //Middlewares
 const corsOptions = {
-  origin: "http://localhost:3001",
+  origin: ["http://localhost:3001", "http://localhost:3002"],
   credentials: true,
 };
 
@@ -28,7 +28,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET || "secret",
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
       maxAge: 6000 * 60,
     },

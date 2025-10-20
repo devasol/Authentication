@@ -26,8 +26,8 @@ export const authStatus = async () => {
   });
 };
 
-export const logoutUser = async (username, password) => {
-  return await api.get(
+export const logoutUser = async () => {
+  return await api.post(
     "/auth/logout",
     {},
     {

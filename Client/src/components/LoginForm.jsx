@@ -27,10 +27,15 @@ const LoginForm = ({ onLoginSuccess }) => {
       setConfirmPassword("");
       setMessage("");
 
-      setError(error.response.data.error);
+      if (error.response) {
+        setError(error.response.data.error);
+      } else {
+        setError("Network Error");
+      }
     }
   };
   const handleLogin = async (e) => {
+    console.log("handleLogin called");
     e.preventDefault();
     try {
       const { data } = await loginUser(username, password);
@@ -44,7 +49,11 @@ const LoginForm = ({ onLoginSuccess }) => {
       console.log("The err is : ", error.message);
       setUsername("");
       setPassword("");
-      setError(error.response.data.error);
+      if (error.response) {
+        setError(error.response.data.error);
+      } else {
+        setError("Network Error");
+      }
       setMessage("");
     }
   };

@@ -8,6 +8,7 @@ export const SessionProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [isMfaActive, setIsMfaActive] = useState(false);
 
   useEffect(() => {
     const storedUser = JSON.parse(sessionStorage.getItem("user"));
@@ -15,6 +16,7 @@ export const SessionProvider = ({ children }) => {
     if (storedUser) {
       setUser(storedUser);
       setIsLoggedIn(true);
+      setIsMfaActive(storedUser.isMfaActive);
     }
     setLoading(false);
   }, []);
@@ -22,6 +24,7 @@ export const SessionProvider = ({ children }) => {
   const login = (userData) => {
     setIsLoggedIn(true);
     setUser(userData);
+    setIsMfaActive(userData.isMfaActive);
     sessionStorage.setItem("user", JSON.stringify(userData));
   };
 
@@ -29,12 +32,13 @@ export const SessionProvider = ({ children }) => {
     if (data) {
       setIsLoggedIn(false);
       setUser(null);
+      setIsMfaActive(false);
       sessionStorage.removeItem("user");
     }
   };
   return (
     <SessionContext.Provider
-      value={{ isLoggedIn, loading, user, login, logout }}
+      value={{ isLoggedIn, loading, user, isMfaActive, login, logout }}
     >
       {children}
     </SessionContext.Provider>
