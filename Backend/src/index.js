@@ -9,37 +9,42 @@ import passport from "passport";
 import dbConnect from "./config/dbConnect.js";
 import authRoutes from "./routes/authRoutes.js";
 import "./config/passportConfig.js";
+import helmet from "helmet";
 
 dotenv.config();
 dbConnect();
 
 const app = express();
 
-//Middlewares
+
 const corsOptions = {
-  origin: ["http://localhost:3001", "http://localhost:3002"],
+  origin: "*",
   credentials: true,
 };
 
-app.use(cors(corsOptions));
-app.use(express.json({ limit: "100mb" }));
-app.use(urlencoded({ limit: "100mb", extended: true }));
+app.set("trust proxy", 1);
+
+app.use(helmet());
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "secret",
     resave: false,
     saveUninitialized: true,
     cookie: {
-      maxAge: 6000 * 60,
+      maxAge: 6000 * 60 * 60 * 24,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     },
   })
 );
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Routes
+
 app.use("/api/auth", authRoutes);
-//Server Listen
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
