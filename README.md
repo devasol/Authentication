@@ -1,6 +1,6 @@
 # 🚀 Full-Stack Authentication System with 2FA 🚀
 
-![Authentication System Banner](https://via.placeholder.com/1200x400/4A235A/FFFFFF?text=Secure+Your+Apps)
+![Authentication System Banner](./Client/public/github-readme-image/Screenshot%20from%202025-10-20%2017-17-11.png)
 
 ## ✨ Overview
 
@@ -10,42 +10,42 @@ Whether you're building a new application or integrating secure authentication i
 
 ## 🌟 Features
 
--   **User Registration:** Secure creation of new user accounts.
--   **User Login:** Authenticate users with username and password.
--   **Session Management:** Persistent user sessions using `express-session`.
--   **Password Hashing:** Industry-standard password security with `bcrypt`.
--   **Two-Factor Authentication (2FA):**
-    -   **Setup:** Users can easily enable 2FA via QR code scanning or manual key entry.
-    -   **Verification:** Secure login with TOTP (Time-based One-Time Password).
-    -   **Reset:** Option to reset 2FA setup if access is lost.
--   **Protected Routes:** Frontend routes secured based on authentication status.
--   **CORS Configuration:** Properly configured for seamless frontend-backend communication.
--   **Responsive UI:** Modern and attractive user interface built with React and Tailwind CSS.
+- **User Registration:** Secure creation of new user accounts.
+- **User Login:** Authenticate users with username and password.
+- **Session Management:** Persistent user sessions using `express-session`.
+- **Password Hashing:** Industry-standard password security with `bcrypt`.
+- **Two-Factor Authentication (2FA):**
+  - **Setup:** Users can easily enable 2FA via QR code scanning or manual key entry.
+  - **Verification:** Secure login with TOTP (Time-based One-Time Password).
+  - **Reset:** Option to reset 2FA setup if access is lost.
+- **Protected Routes:** Frontend routes secured based on authentication status.
+- **CORS Configuration:** Properly configured for seamless frontend-backend communication.
+- **Responsive UI:** Modern and attractive user interface built with React and Tailwind CSS.
 
 ## 🛠️ Technologies Used
 
 ### Frontend
 
--   **React.js:** A declarative, efficient, and flexible JavaScript library for building user interfaces.
--   **React Router DOM:** For declarative routing in React applications.
--   **Axios:** Promise-based HTTP client for making API requests.
--   **Tailwind CSS:** A utility-first CSS framework for rapidly building custom designs.
--   **Vite:** A fast build tool that provides an extremely fast development experience.
+- **React.js:** A declarative, efficient, and flexible JavaScript library for building user interfaces.
+- **React Router DOM:** For declarative routing in React applications.
+- **Axios:** Promise-based HTTP client for making API requests.
+- **Tailwind CSS:** A utility-first CSS framework for rapidly building custom designs.
+- **Vite:** A fast build tool that provides an extremely fast development experience.
 
 ### Backend
 
--   **Node.js:** JavaScript runtime built on Chrome's V8 JavaScript engine.
--   **Express.js:** Fast, unopinionated, minimalist web framework for Node.js.
--   **Mongoose:** MongoDB object modeling for Node.js.
--   **MongoDB:** A NoSQL, document-oriented database.
--   **Bcrypt:** Library for hashing passwords.
--   **JSON Web Token (JWT):** For secure information exchange between parties.
--   **Speakeasy:** For generating and verifying time-based one-time passwords (TOTP).
--   **QRcode:** For generating QR codes for 2FA setup.
--   **Express-Session:** Simple session middleware for Express.
--   **Passport.js:** Authentication middleware for Node.js.
--   **CORS:** Node.js CORS middleware.
--   **Dotenv:** Loads environment variables from a `.env` file.
+- **Node.js:** JavaScript runtime built on Chrome's V8 JavaScript engine.
+- **Express.js:** Fast, unopinionated, minimalist web framework for Node.js.
+- **Mongoose:** MongoDB object modeling for Node.js.
+- **MongoDB:** A NoSQL, document-oriented database.
+- **Bcrypt:** Library for hashing passwords.
+- **JSON Web Token (JWT):** For secure information exchange between parties.
+- **Speakeasy:** For generating and verifying time-based one-time passwords (TOTP).
+- **QRcode:** For generating QR codes for 2FA setup.
+- **Express-Session:** Simple session middleware for Express.
+- **Passport.js:** Authentication middleware for Node.js.
+- **CORS:** Node.js CORS middleware.
+- **Dotenv:** Loads environment variables from a `.env` file.
 
 ## 🚀 Getting Started
 
@@ -55,9 +55,9 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 Before you begin, ensure you have the following installed:
 
--   **Node.js** (LTS version recommended)
--   **npm** (Node Package Manager) or **Yarn**
--   **MongoDB** (Community Edition or a cloud-hosted solution like MongoDB Atlas)
+- **Node.js** (LTS version recommended)
+- **npm** (Node Package Manager) or **Yarn**
+- **MongoDB** (Community Edition or a cloud-hosted solution like MongoDB Atlas)
 
 ### Installation
 
@@ -115,15 +115,15 @@ Before you begin, ensure you have the following installed:
 
 All API endpoints are prefixed with `/api/auth`.
 
-| Method | Endpoint          | Description                                   |
-| :----- | :---------------- | :-------------------------------------------- |
-| `POST` | `/register`       | Register a new user.                          |
-| `POST` | `/login`          | Authenticate user and establish session.      |
-| `GET`  | `/status`         | Check current authentication status.          |
-| `POST` | `/logout`         | Log out the current user and destroy session. |
-| `POST` | `/2fa/setup`      | Initiate 2FA setup (returns QR code data).    |
-| `POST` | `/2fa/verify`     | Verify 2FA TOTP.                              |
-| `POST` | `/2fa/reset`      | Reset 2FA for the current user.               |
+| Method | Endpoint      | Description                                   |
+| :----- | :------------ | :-------------------------------------------- |
+| `POST` | `/register`   | Register a new user.                          |
+| `POST` | `/login`      | Authenticate user and establish session.      |
+| `GET`  | `/status`     | Check current authentication status.          |
+| `POST` | `/logout`     | Log out the current user and destroy session. |
+| `POST` | `/2fa/setup`  | Initiate 2FA setup (returns QR code data).    |
+| `POST` | `/2fa/verify` | Verify 2FA TOTP.                              |
+| `POST` | `/2fa/reset`  | Reset 2FA for the current user.               |
 
 ## 🤝 Contributing
 
