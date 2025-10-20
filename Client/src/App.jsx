@@ -2,6 +2,7 @@ import { RouterProvider } from "react-router-dom";
 import router from "./routes";
 import "./App.css";
 import { SessionProvider } from "./context/SessionContext";
+import TitleUpdater from "./components/TitleUpdater";
 
 function App() {
   return (
@@ -40,7 +41,9 @@ function App() {
             {/* Content Area */}
             <div className="p-8">
               <SessionProvider>
-                <RouterProvider router={router} />
+                <RouterProvider router={router}>
+                  <TitleUpdater />
+                </RouterProvider>
               </SessionProvider>
             </div>
 
@@ -100,22 +103,6 @@ function App() {
         /* Smooth scrolling */
         html {
           scroll-behavior: smooth;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-          width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-          background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-          border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(to bottom, #2563eb, #7c3aed);
         }
       `}</style>
     </div>
