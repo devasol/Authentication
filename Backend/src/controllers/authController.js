@@ -123,12 +123,17 @@ export const verify2FA = async (req, res) => {
   const { token } = req.body;
   const user = req.user;
 
+  console.log("Verifying token:", token);
+  console.log("User secret:", user.twoFactorSecret);
+
   const verified = speakeasy.totp.verify({
     secret: user.twoFactorSecret,
     encoding: "base32",
     token,
     window: 1,
   });
+
+  console.log("Verification result:", verified);
 
   if (verified) {
     const jwtToken = jwt.sign(

@@ -47,7 +47,7 @@ export const setup2FA = async () => {
 };
 
 export const verify2FA = async (token) => {
-  return await api.get(
+  return await api.post(
     "/auth/2fa/verify",
     { token },
     {
@@ -57,7 +57,7 @@ export const verify2FA = async (token) => {
 };
 
 export const reset2FA = async () => {
-  return await api.get(
+  return await api.post(
     "/auth/2fa/reset",
     {},
     {
